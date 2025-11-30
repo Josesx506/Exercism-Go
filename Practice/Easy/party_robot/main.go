@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+/**
+learn about string formatting
+*/
+
 // Welcome greets a person by name.
 func Welcome(name string) string {
 	// panic("Please implement the Welcome function")

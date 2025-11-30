@@ -1,6 +1,10 @@
 // Package weather tells you the current weather conditions at a specified location.
 package main
 
+/**
+learn about string formatting
+*/
+
 var (
 	// CurrentCondition represents the current weather conditions as a string.
 	CurrentCondition string

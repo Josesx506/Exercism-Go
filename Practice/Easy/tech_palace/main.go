@@ -2,6 +2,10 @@ package main
 
 import "strings"
 
+/**
+learn about string formatting
+*/
+
 // WelcomeMessage returns a welcome message for the customer.
 func WelcomeMessage(customer string) string {
 	// panic("Please implement the WelcomeMessage() function")

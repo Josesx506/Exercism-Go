@@ -4,6 +4,10 @@ import (
 	"fmt"
 )
 
+/**
+learn about slices (arrays) data structures
+*/
+
 // FavoriteCards returns a slice with the cards 2, 6 and 9 in that order.
 func FavoriteCards() []int {
 	// panic("Please implement the FavoriteCards function")

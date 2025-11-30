@@ -1,5 +1,9 @@
 package main
 
+/**
+learn about int and float variable types
+*/
+
 // CalculateWorkingCarsPerHour calculates how many working cars are
 // produced by the assembly line every hour.
 func CalculateWorkingCarsPerHour(productionRate int, successRate float64) float64 {

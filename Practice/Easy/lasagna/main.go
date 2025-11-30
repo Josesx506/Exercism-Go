@@ -1,5 +1,9 @@
 package main
 
+/**
+learn about basic arithmetic operations
+*/
+
 // TODO: define the 'OvenTime' constant
 const OvenTime = 40
 

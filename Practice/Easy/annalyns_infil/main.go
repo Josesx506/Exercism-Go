@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+/**
+learn about conditional statements
+*/
+
 // CanFastAttack can be executed only when the knight is sleeping.
 func CanFastAttack(knightIsAwake bool) bool {
 	// panic("Please implement the CanFastAttack() function")
