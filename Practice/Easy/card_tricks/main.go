@@ -5,7 +5,7 @@ import (
 )
 
 /**
-learn about slices (arrays) data structures
+learn about slices (arrays) data structures and variadic functions
 */
 
 // FavoriteCards returns a slice with the cards 2, 6 and 9 in that order.

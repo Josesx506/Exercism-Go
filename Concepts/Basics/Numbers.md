@@ -13,6 +13,21 @@ For a full list of the available numeric types and more detail see the following
 - [Digital Ocean - Understanding Data Types in Go](https://www.digitalocean.com/community/tutorials/understanding-data-types-in-go)
 - [Arden Labs - Understanding Type in Go](https://www.ardanlabs.com/blog/2013/07/understanding-type-in-go.html)
 
+The Go language provides these basic numeric types:
+```bash
+# Unsigned Integers
+uint8, uint16, uint32, uint64
+
+# Signed Integers
+int8, int16, int32, int64
+
+# Real Numbers
+float32, float64
+
+# Predeclared Integers
+uint, int, uintptr
+```
+
 Go supports the standard set of arithmetic operators of `+`, `-`, `*`, `/` and `%` (remainder not modulo).
 
 In Go, assignment of a value between different types requires explicit conversion. For example, to convert an `int` to a `float64` you would need to do the following:
