@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // TODO: define the 'Car' type struct
 type Car struct {
 	battery      int
@@ -55,13 +57,51 @@ func CanFinish(car Car, track Track) bool {
 	}
 }
 
+/**
+Learn about methods in Go as an extension for OOP
+*/
+
+// TODO: define the 'Drive()' method
+func (c *Car) DriveMethod() {
+	if c.batteryDrain <= c.battery {
+		c.distance += c.speed
+		c.battery -= c.batteryDrain
+	}
+}
+
+// TODO: define the 'DisplayDistance() string' method
+func (c Car) DisplayDistance() string {
+	display := fmt.Sprintf("Driven %d meters", c.distance)
+	return display
+}
+
+// TODO: define the 'DisplayBattery() string' method
+func (c Car) DisplayBattery() string {
+	display := fmt.Sprintf("Battery at %d%%", c.battery)
+	return display
+}
+
+// TODO: define the 'CanFinish(trackDistance int) bool' method
+func (c Car) CanFinishMethod(trackDistance int) bool {
+	cycles := (trackDistance / c.speed)
+	return c.battery >= (cycles*c.batteryDrain) && (cycles*c.speed) >= trackDistance
+}
+
 func main() {
 	speed := 5
 	batteryDrain := 2
+
+	// Struct and functions tests
 	car := NewCar(speed, batteryDrain)
 
 	distance := 100
 	track := NewTrack(distance)
 
 	println(CanFinish(car, track)) // true
+
+	// Methods test
+	car.DriveMethod()
+	fmt.Println(car.DisplayBattery())
+	fmt.Println(car.DisplayDistance())
+	fmt.Println(car.CanFinishMethod(320))
 }

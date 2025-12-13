@@ -1,4 +1,6 @@
-### Intro
+### Structs and Methods
+Structs and methods are eqivalent to classes and methods in other OOP languages like python. In Go they're defined using a different syntax in a loosely coupled manner. <br>
+
 In Go, a struct is a sequence of named elements called fields, each field has a name and 
 type. The name of a field must be unique within the struct. Structs can be compared with 
 ***classes*** in the Object-Oriented Programming paradigm.
@@ -107,3 +109,49 @@ initialized to the zero value of their type and returns a pointer to it. <br>
 
 ### Additional Resources
 - [Structures in Go](https://medium.com/rungo/structures-in-go-76377cc106a2)
+
+
+### Methods
+A method is a function with a special receiver argument. The receiver appears in its own argument list between func keyword and the name of the method.
+```go
+func (receiver type) MethodName(parameters) (returnTypes) {
+	...
+}
+```
+***You can only define a method with a receiver whose type is defined in the same package as the method.***
+```go
+type Person struct {
+    Name string
+}
+
+func (p Person) Greetings() string {
+	return fmt.Sprintf("Welcome %s!", p.Name)
+}
+
+s := Person{Name: "Bronson"}
+fmt.Println(s.Greetings())
+// Output: Welcome Bronson!
+```
+There are two types of receivers, 
+- value receivers, and 
+- pointer receivers.
+
+Methods with a **value receiver** operate on a copy of the value passed to it, meaning that any modification done to the receiver inside the method is not visible to the caller. <br>
+
+You can declare methods with pointer receivers in order to modify the value to which the receiver points. This is done by prefixing the type name with a `*`, for example with the `rect` type, a pointer receiver would be declared as `*rect`. Such modifications are visible to the caller of the method as well.
+```go
+type rect struct {
+	width, height int
+}
+func (r *rect) squareIt() {
+	r.height = r.width
+}
+
+r := rect{width: 10, height: 20}
+fmt.Printf("Width: %d, Height: %d\n", r.width, r.height)
+// Output: Width: 10, Height: 20
+
+r.squareIt()
+fmt.Printf("Width: %d, Height: %d\n", r.width, r.height)
+// Output: Width: 10, Height: 10
+```
