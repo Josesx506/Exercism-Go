@@ -1,4 +1,4 @@
-### Structs and Methods
+## Structs, Methods, and Interfaces
 Structs and methods are eqivalent to classes and methods in other OOP languages like python. In Go they're defined using a different syntax in a loosely coupled manner. <br>
 
 In Go, a struct is a sequence of named elements called fields, each field has a name and 
@@ -155,3 +155,90 @@ r.squareIt()
 fmt.Printf("Width: %d, Height: %d\n", r.width, r.height)
 // Output: Width: 10, Height: 10
 ```
+
+Method names can be reused multiple times and associated with different receivers. This 
+means that the same method name can implement different logic for different receivers. e.g.
+```go
+type Italian struct {}
+type Portuguese struct {}
+
+func (i Italian) LanguageName() string {
+	return "Italian"
+}
+func (p Portuguese) LanguageName() string {
+	return "Portuguese"
+}
+// OR
+type rect struct {
+    width, height float64
+}
+type circle struct {
+    radius float64
+}
+
+func (r rect) area() float64 {
+    return r.width * r.height
+}
+func (c circle) area() float64 {
+    return math.Pi * c.radius * c.radius
+}
+```
+The `LanguageName` and `area` methods returns two different values depending on the 
+associated receiver. This allows reusing of methods within collections, known as 
+`interfaces` in Go.
+
+### Interfaces
+In its simplest form, an **interface type** is a collection of method signatures. Here is 
+an example of an interface definition that includes two methods `Add` and `Value`:
+```go
+type Counter interface {
+    Add(increment int)
+    Value() int
+}
+```
+The parameter names like *`increment`* can be omitted from the interface definition but they often increase readability. <br>
+
+Interface names in Go do not contain the word Interface or I. Instead, they often end with `er`, e.g. Reader, Stringer
+
+### Implementing an interface
+Any type that defines the methods of the interface automatically implicitly "implements" the interface. There is no implements keyword in Go. <br>
+
+The following type implements the Counter interface we saw above.
+```go
+type Stats struct {
+    value int
+    // ...
+}
+
+func (s Stats) Add(v int) {
+    s.value += v
+}
+
+func (s Stats) Value() int {
+    return s.value
+}
+
+func (s Stats) SomeOtherMethod() {
+    // The type can have additional methods not mentioned in the interface.
+}
+```
+For implementing the interface, it does not matter whether the method has a value or pointer receiver. <br>
+
+> A value of interface type can hold any value that implements those methods.
+
+That means `Stats` can now be used in all the places that expect the `Counter` interface.
+```go
+func SetUpAnalytics(counter Counter) {
+    // ...
+}
+
+stats := Stats{}
+SetUpAnalytics(stats)
+// works because Stats implements Counter
+```
+Because interfaces are implemented implicitly, a type can easily implement multiple interfaces. It only needs to have all the necessary methods defined.
+
+### Empty interface
+There is one very special interface type in Go, the empty interface type that contains zero methods. The empty interface is written like this: `interface{}`. In Go 1.18 or higher, any can be used as well. It was defined as an alias. <br>
+
+Since the empty interface has no methods, every type implements it implicitly. This is helpful for defining a function that can generically accept any value. In that case, the function parameter uses the empty interface type.

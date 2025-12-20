@@ -3,6 +3,27 @@ A function allows you to group code into a reusable unit. It consists of the `fu
 keyword, the name of the function, and a comma-separated list of zero or more parameters 
 and types in round brackets.
 
+> [!Note]
+> Non-declaration statement are not allowed outside functions in a go file/script/package, 
+  but `const` and `var` can be defined since they're global in nature.
+
+```go
+package variableassign
+
+// This will throw an error because it's supposed to auto-infer variable type
+A := 5
+
+// This will not throw an error
+var A int = 5
+const B int = 5
+
+func DoSomething() {
+  // This will not throw an error
+  var C int = 5
+  println(C)
+}
+```
+
 ### Function Parameters
 All parameters must be explicitly typed; there is no type inference for parameters. There are no default values for parameters so all function parameters are required.
 ```go
