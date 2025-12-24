@@ -76,5 +76,8 @@ func main() {
 		"[DBG] We need to check that user names are at least 6 chars long.",
 	}
 	TagWithUserName(lines)
-	// fmt.Println()
+
+	var input any = "12"
+	number, ok := input.(string)
+	fmt.Println(number, ok)
 }
