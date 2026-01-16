@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// Learn about pointers and addresses
+
 type ElectionResult struct {
 	Name  string // Name of the candidate
 	Votes int    // Votes of votes the candidate had

@@ -40,7 +40,14 @@ newSlice  := append(withData, nextSlice...)
 ```
 
 #### Indexes in slices
-Working with indexes of slices should always be protected in some way by a check that makes sure the index actually exists. Failing to do so will crash the entire application.
+Working with indexes of slices should always be protected in some way by a check that makes sure the index actually exists. Failing to do so will crash the entire application. An example of a indexing is 
+```go
+firstThree := newSlice[0:3]
+```
+Indexing can also be used to copy an entire slice
+```go
+copySlice := newSlice[:]
+```
 
 #### Empty slices
 `nil-slices` are the default empty slice. They have no drawbacks towards a slice with no values in them. The `len` function works on nil-slices, items can be added without initializing it, and so on. If creating a new slice ***prefer*** `var s []int` (nil-slice) over `s := []int{}` (empty, non-nil slice).
@@ -50,3 +57,13 @@ When creating slices to be filled iteratively, there is a low-hanging fruit to i
 
 #### Append is not a pure function
 The `append` function of Go is optimized for performance and therefore does not make a copy of the input slice. This means that the original slice (1st parameter in `append`) will be changed sometimes.
+
+### Matrices
+You can create multi-dimensional arrays as matrices in go using nested square brackets with dimensions specified, such as 
+```go
+matrix := [2][3]int{
+    {1, 2, 3}, 
+    {4, 5, 6}
+}
+```
+The first number represents rows, and the second represents columns.
