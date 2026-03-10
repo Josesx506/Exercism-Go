@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE Client</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            width: min(95%, 1200px);
+            margin: 0 auto;
+            padding-top: 2rem;
+        }
+        .textbox {
+            padding: 0.25rem 1rem;
+            display: flex;
+            justify-content: flex-start;
+            border: 1px solid black;
+            min-height: 3rem;
+            border-radius: 0.75rem;
+        }
+    </style>
+    <script defer>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("DOM fully loaded and parsed");
+
+            var sse = new EventSource("http://localhost:8080/events");
+            var resp = document.querySelector(".textbox");
+            console.log(resp)
+
+            sse.onmessage = function (event) {
+                console.log("New data:", event.data)
+                resp.innerHTML += event.data + " ";
+            };
+
+            sse.onerror = function (err) {
+                console.error("SSE Error:", err);
+                // Clear the textbox if no messages are received in 1 sec
+                // setTimeout(()=>(resp.innerHTML=""), 1000)
+                if (sse.readyState === EventSource.CLOSED) {
+                    setTimeout(() => (resp.innerHTML = "Connection Lost..."), 1000);
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <h2 style="text-align: center;">Real time SSE</h2>
+    <p class="textbox"></p>
+</body>
+</html>
